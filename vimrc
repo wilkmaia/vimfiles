@@ -41,7 +41,7 @@ Plug 'tomasr/molokai'
 " Languages
 Plug 'b4winckler/vim-objc'
 Plug 'rodjek/vim-puppet'
-Plug 'jnwhiteh/vim-golang'
+Plug 'fatih/vim-go'
 Plug 'pangloss/vim-javascript'
 Plug 'gkz/vim-ls'
 Plug 'kchmck/vim-coffee-script'
