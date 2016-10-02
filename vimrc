@@ -19,6 +19,8 @@ Plug 'sjl/vitality.vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'metakirby5/codi.vim'
 Plug 'AndrewRadev/splitjoin.vim'
+Plug 'machakann/vim-highlightedyank'
+Plug 'mhinz/vim-startify'
 
 " Support
 Plug 'tpope/vim-dispatch'
