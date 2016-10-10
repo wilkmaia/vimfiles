@@ -21,6 +21,7 @@ Plug 'metakirby5/codi.vim'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mhinz/vim-startify'
+Plug 'tpope/vim-abolish'
 
 " Support
 Plug 'tpope/vim-dispatch'
