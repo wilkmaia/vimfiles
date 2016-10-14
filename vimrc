@@ -49,6 +49,7 @@ Plug 'b4winckler/vim-objc'
 Plug 'rodjek/vim-puppet'
 Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
 Plug 'fatih/vim-go'
+Plug 'dag/vim-fish'
 Plug 'pangloss/vim-javascript'
 Plug 'gkz/vim-ls'
 Plug 'kchmck/vim-coffee-script'
