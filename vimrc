@@ -25,6 +25,9 @@ Plug 'tpope/vim-abolish'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-eunuch'
 Plug 'edkolev/tmuxline.vim'
+Plug 'bfredl/nvim-miniyank'
+Plug 'tpope/vim-sleuth'
+Plug 'duggiefresh/vim-easydir'
 
 " Support
 Plug 'tpope/vim-dispatch'
@@ -36,7 +39,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'Raimondi/delimitMate'
 Plug 'msanders/snipmate.vim'
 Plug 'tomtom/tcomment_vim'
-Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'Shougo/vimproc.vim'
 
 " Colorschemes
@@ -72,25 +74,21 @@ Plug 'uarun/vim-protobuf'
 Plug 'CyCoreSystems/vim-cisco-ios'
 Plug 'tpope/vim-markdown'
 Plug 'jtratner/vim-flavored-markdown'
+Plug 'evanmiller/nginx-vim-syntax'
+Plug 'leafgarland/typescript-vim'
 
 " JS Beautify
 Plug 'michalliu/jsruntime.vim'
 Plug 'michalliu/jsoncodecs.vim'
 
 " Omnicompletion
-if has('nvim')
-	Plug 'neomake/neomake'
-	Plug 'Shougo/deoplete.nvim'
-	Plug 'carlitux/deoplete-ternjs'
-	Plug 'zchee/deoplete-go', { 'do': 'make' }
-	Plug 'awetzel/elixir.nvim'
-	Plug 'zchee/deoplete-clang'
-else
-	Plug 'Valloric/YouCompleteMe'
-	Plug 'scrooloose/syntastic'
-endif 
-
-Plug 'OmniSharp/omnisharp-vim'
+Plug 'neomake/neomake'
+Plug 'Shougo/deoplete.nvim'
+Plug 'carlitux/deoplete-ternjs'
+Plug 'zchee/deoplete-go', { 'do': 'make' }
+Plug 'awetzel/elixir.nvim'
+Plug 'zchee/deoplete-clang'
+Plug 'mhartington/deoplete-typescript'
 
 " Search
 Plug 'haya14busa/incsearch.vim'
@@ -179,7 +177,6 @@ syntax on
 
 " Sets the colorscheme for terminal sessions too.
 colorscheme dracula
-autocmd BufEnter * colorscheme dracula
 
 " Leader = ,
 let mapleader = ","
@@ -196,6 +193,14 @@ let g:omni_sql_no_default_maps = 1
 
 " Completion
 set completeopt=menu,noselect
+
+" augroup completion
+"   autocmd!
+"   autocmd InsertLeave * pclose
+" augroup end
+
+" Incsearch
+set inccommand=split
 " }}}
 " ##### General mappings  {{{
 " ##### Tabs {{{
@@ -321,13 +326,11 @@ let $FZF_DEFAULT_COMMAND = 'ag -g ""'
 nnoremap <C-P> :Files<cr>
 nnoremap <C-F> :Ag 
 " }}}
-" ##### Yankstack  {{{
-" Don't use default mappings
-let g:yankstack_map_keys = 0
+" ##### miniyank  {{{
+map p <Plug>(miniyank-autoput)
+map P <Plug>(miniyank-autoPut)
 
-" Set bindings
-nmap <C-M> <Plug>yankstack_substitute_older_paste
-nmap <C-N> <Plug>yankstack_substitute_newer_paste
+map <C-m> <Plug>(miniyank-cycle)
 " }}}
 " ##### Number toggle  {{{
 let g:NumberToggleTrigger="<leader>ll"
@@ -341,56 +344,6 @@ let g:localvimrc_persistent=1
 " }}}
 " ##### editorconfig {{{
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
-" }}}
-" ##### OmniSharp {{{
-let g:OmniSharp_timeout = 1
-
-let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
-
-augroup omnisharp_commands
-    autocmd!
-
-    " Builds can also run asynchronously with vim-dispatch installed
-    autocmd FileType cs nnoremap <leader>b :wa!<cr>:OmniSharpBuildAsync<cr>
-
-    " Automatic syntax check on events (TextChanged requires Vim 7.4)
-    autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
-
-    " Automatically add new cs files to the nearest project on save
-    autocmd BufWritePost *.cs call OmniSharp#AddToProject()
-
-    " Show type information automatically when the cursor stops moving
-    autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
-
-    " The following commands are contextual, based on the current cursor position.
-    autocmd FileType cs nnoremap <localleader>gd :OmniSharpGotoDefinition<cr>
-    autocmd FileType cs nnoremap <localleader>fi :OmniSharpFindImplementations<cr>
-    autocmd FileType cs nnoremap <localleader>ft :OmniSharpFindType<cr>
-    autocmd FileType cs nnoremap <localleader>fs :OmniSharpFindSymbol<cr>
-    autocmd FileType cs nnoremap <localleader>fu :OmniSharpFindUsages<cr>
-
-    " Finds members in the current buffer
-    autocmd FileType cs nnoremap <localleader>fm :OmniSharpFindMembers<cr>
-
-    " Cursor can be anywhere on the line containing an issue
-    autocmd FileType cs nnoremap <localleader>x  :OmniSharpFixIssue<cr>
-    autocmd FileType cs nnoremap <localleader>fx :OmniSharpFixUsings<cr>
-    autocmd FileType cs nnoremap <localleader>tt :OmniSharpTypeLookup<cr>
-    autocmd FileType cs nnoremap <localleader>dc :OmniSharpDocumentation<cr>
-augroup END
-
-" Force OmniSharp to reload the solution. Useful when switching branches etc.
-nnoremap <leader>rl :OmniSharpReloadSolution<cr>
-" nnoremap <leader>cf :OmniSharpCodeFormat<cr>
-" Load the current .cs file to the nearest project
-nnoremap <leader>tp :OmniSharpAddToProject<cr>
-
-" (Experimental - uses vim-dispatch or vimproc plugin) - Start the omnisharp server for the current solution
-nnoremap <leader>ss :OmniSharpStartServer<cr>
-nnoremap <leader>sp :OmniSharpStopServer<cr>
-
-" Add syntax highlighting for types and interfaces
-nnoremap <leader>th :OmniSharpHighlightTypes<cr>
 " }}}
 " ##### Syntastic {{{
 let g:syntastic_enable_highlighting = 0
@@ -409,14 +362,7 @@ let g:monster#completion#rcodetools#backend = "async_rct_complete"
 " ##### Neomake {{{
 augroup neomake_save_linter
 	autocmd!
-	autocmd BufWritePost *.js Neomake
-	autocmd BufWritePost *.py Neomake
-	autocmd BufWritePost *.rb Neomake
-	autocmd BufWritePost *.pp Neomake
-	autocmd BufWritePost *.erl Neomake
-	autocmd BufWritePost *.ex Neomake
-	autocmd BufWritePost *.exs Neomake
-	autocmd BufWritePost *.go Neomake
+	autocmd BufWritePost * Neomake
 augroup end
 
 let g:neomake_javascript_standard_maker = { 'errorformat': '%E %f:%l:%c: %m' }
@@ -431,6 +377,9 @@ let g:tmuxline_preset = {
     \'x'       : ['#{prefix_highlight}'],
     \'z'       : ['On: #{online_status}', '#{battery_icon} #{battery_percentage}', '%R'],
     \'options' : {'status-justify' : 'left'}}
+" }}}
+" ##### terraform {{{
+let g:terraform_fmt_on_save = 1
 " }}}
 " }}}
 " ##### Filetype-specific  {{{
@@ -466,9 +415,6 @@ autocmd BufRead,BufNewFile *.md,*.markdown set filetype=ghmarkdown
 autocmd BufRead,BufNewFile *.md set wrap
 " }}}
 " ##### JavaScript  {{{
-" Sets javascript syntax for *.json files.
-autocmd BufRead,BufNewFile *.json set filetype=javascript
-
 " Sets html syntax for *.ejs files.
 autocmd BufRead,BufNewFile *.ejs set filetype=html
 " }}}
@@ -507,5 +453,13 @@ autocmd FileType elixir set tabstop=2
 " }}}
 " ##### Go {{{
 autocmd FileType go set foldmethod=syntax
+" }}}
+" ##### Terraform {{{
+autocmd FileType terraform set shiftwidth=2
+autocmd FileType terraform set tabstop=2
+autocmd FileType terraform set expandtab
+" }}}
+" ##### Docker {{{
+autocmd BufRead,BufNewFile Rockerfile set filetype=dockerfile
 " }}}
 " }}}
