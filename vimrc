@@ -28,6 +28,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'bfredl/nvim-miniyank'
 Plug 'tpope/vim-sleuth'
 Plug 'duggiefresh/vim-easydir'
+Plug 'wikitopian/hardmode'
 
 " Support
 Plug 'tpope/vim-dispatch'
@@ -380,6 +381,12 @@ let g:tmuxline_preset = {
 " }}}
 " ##### terraform {{{
 let g:terraform_fmt_on_save = 1
+" }}}
+" ##### HardMode {{{
+let g:HardMode_echo = 0
+let g:HardMode_level = 'wannabe'
+
+autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 " }}}
 " }}}
 " ##### Filetype-specific  {{{
