@@ -28,7 +28,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'bfredl/nvim-miniyank'
 Plug 'tpope/vim-sleuth'
 Plug 'duggiefresh/vim-easydir'
-Plug 'wikitopian/hardmode'
+Plug 'junegunn/goyo.vim'
 
 " Support
 Plug 'tpope/vim-dispatch'
@@ -214,6 +214,37 @@ nnoremap <leader>p :tabprevious<cr>
 nmap <leader>1 :TagbarToggle<CR>
 nmap <leader>2 :NERDTreeToggle<CR>
 " }}}
+" ##### Panes {{{
+fun! RemapPaneArrows()
+  nnoremap <buffer> <silent> <Right> :vertical resize +5<cr>
+  nnoremap <buffer> <silent> <Left> :vertical resize -5<cr>
+  nnoremap <buffer> <silent> <Down> :resize +5<cr>
+  nnoremap <buffer> <silent> <Up> :resize -5<cr>
+endfun
+
+augroup remappanesarrows
+	autocmd!
+	autocmd VimEnter,BufNewFile,BufReadPost,BufEnter * silent! call RemapPaneArrows()
+augroup end
+" }}}
+" ##### Hard Mode {{{
+fun! RemapArrows()
+  inoremap <buffer> <silent> <Right> <nop>
+  inoremap <buffer> <silent> <Left> <nop>
+  inoremap <buffer> <silent> <Up> <nop>
+  inoremap <buffer> <silent> <Down> <nop>
+
+  vnoremap <buffer> <silent> <Right> <nop>
+  vnoremap <buffer> <silent> <Left> <nop>
+  vnoremap <buffer> <silent> <Up> <nop>
+  vnoremap <buffer> <silent> <Down> <nop>
+endfun
+
+augroup hardmode
+	autocmd!
+	autocmd VimEnter,BufNewFile,BufReadPost * silent! call RemapArrows()
+augroup end
+" }}}
 " ##### Line movement {{{
 " Go to start of line with H and to the end with $
 noremap H ^
@@ -366,6 +397,7 @@ augroup neomake_save_linter
 	autocmd BufWritePost * Neomake
 augroup end
 
+let g:neomake_highlight_columns = 1
 let g:neomake_javascript_standard_maker = { 'errorformat': '%E %f:%l:%c: %m' }
 let g:neomake_puppet_enabled_makers = ['puppet', 'puppetlint']
 " }}}
@@ -381,12 +413,6 @@ let g:tmuxline_preset = {
 " }}}
 " ##### terraform {{{
 let g:terraform_fmt_on_save = 1
-" }}}
-" ##### HardMode {{{
-let g:HardMode_echo = 0
-let g:HardMode_level = 'wannabe'
-
-autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 " }}}
 " }}}
 " ##### Filetype-specific  {{{
