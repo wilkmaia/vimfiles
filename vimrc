@@ -78,6 +78,7 @@ Plug 'tpope/vim-markdown'
 Plug 'jtratner/vim-flavored-markdown'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'leafgarland/typescript-vim'
+Plug 'PProvost/vim-ps1'
 
 " JS Beautify
 Plug 'michalliu/jsruntime.vim'
@@ -413,6 +414,15 @@ let g:tmuxline_preset = {
 " }}}
 " ##### terraform {{{
 let g:terraform_fmt_on_save = 1
+" }}}
+" ##### vim-go {{{
+au FileType go nmap <Leader>iD <Plug>(go-def-split)
+au FileType go nmap <Leader>id <Plug>(go-def-vertical)
+au FileType go nmap <Leader>iH <Plug>(go-doc)
+au FileType go nmap <Leader>ih <Plug>(go-doc-vertical)
+au FileType go nmap <Leader>ii <Plug>(go-implements)
+au FileType go nmap <Leader>rr <Plug>(go-rename)
+au FileType go nmap <Leader>rI <Plug>(go-imports)
 " }}}
 " }}}
 " ##### Filetype-specific  {{{
