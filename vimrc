@@ -29,6 +29,8 @@ Plug 'bfredl/nvim-miniyank'
 Plug 'tpope/vim-sleuth'
 Plug 'duggiefresh/vim-easydir'
 Plug 'junegunn/goyo.vim'
+Plug 'wikitopian/hardmode'
+Plug 'vimwiki/vimwiki'
 
 " Support
 Plug 'tpope/vim-dispatch'
@@ -79,6 +81,10 @@ Plug 'jtratner/vim-flavored-markdown'
 Plug 'evanmiller/nginx-vim-syntax'
 Plug 'leafgarland/typescript-vim'
 Plug 'PProvost/vim-ps1'
+Plug 'Matt-Deacalion/vim-systemd-syntax'
+Plug 'zainin/vim-mikrotik'
+Plug 'rust-lang/rust.vim'
+Plug 'jodosha/vim-godebug'
 
 " JS Beautify
 Plug 'michalliu/jsruntime.vim'
@@ -89,7 +95,10 @@ Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim'
 Plug 'carlitux/deoplete-ternjs'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
-Plug 'zchee/deoplete-clang'
+" Plug 'zchee/deoplete-clang'
+Plug 'awetzel/elixir.nvim'
+Plug 'OmniSharp/omnisharp-vim'
+Plug 'Robzz/deoplete-omnisharp'
 Plug 'mhartington/deoplete-typescript'
 
 " Search
@@ -105,6 +114,9 @@ Plug 'tpope/vim-fugitive'
 call plug#end()
 " }}}
 " ##### Basic options  {{{
+" ALWAYS use bash
+set shell=/bin/bash
+
 " NeoVim Options
 " Display incomplete commands.
 set noshowcmd
@@ -176,6 +188,11 @@ set autoread
 
 " Enable syntax highlighting
 syntax on
+
+" Sane defaults
+set expandtab
+set shiftwidth=4
+set tabstop=4
 
 " Sets the colorscheme for terminal sessions too.
 colorscheme dracula
@@ -424,6 +441,23 @@ au FileType go nmap <Leader>ii <Plug>(go-implements)
 au FileType go nmap <Leader>rr <Plug>(go-rename)
 au FileType go nmap <Leader>rI <Plug>(go-imports)
 " }}}
+" ##### vim-wiki {{{
+let g:vimwiki_ext2syntax = {'.md': 'markdown',
+                          \ '.mkd': 'markdown',
+                          \ '.wiki': 'media'}
+" }}}
+" ##### OmniSharp {{{
+let g:OmniSharp_selector_ui = 'fzf'
+let g:OmniSharp_server_type = 'v1'
+let g:OmniSharp_server_type = 'roslyn'
+
+augroup omnisharp
+  autocmd!
+
+  autocmd FileType cs nnoremap <leader>b :wa!<cr>:OmniSharpBuildAsync<cr><Paste>
+  autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
+augroup END
+" }}}
 " }}}
 " ##### Filetype-specific  {{{
 " ##### Ruby  {{{
@@ -503,6 +537,7 @@ autocmd FileType terraform set tabstop=2
 autocmd FileType terraform set expandtab
 " }}}
 " ##### Docker {{{
-autocmd BufRead,BufNewFile Rockerfile set filetype=dockerfile
+autocmd BufRead,BufNewFile Dockerfile* set filetype=dockerfile
+autocmd BufRead,BufNewFile Rockerfile* set filetype=dockerfile
 " }}}
 " }}}
