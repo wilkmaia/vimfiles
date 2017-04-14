@@ -106,6 +106,9 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 
+" Windowswap
+Plug 'wesQ3/vim-windowswap'
+
 " Git
 Plug 'tpope/vim-fugitive'
 " }}}
