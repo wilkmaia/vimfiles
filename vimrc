@@ -116,6 +116,9 @@ call plug#end()
 " ALWAYS use bash
 set shell=/bin/bash
 
+" Highlight current line
+set cursorline
+
 " NeoVim Options
 " Display incomplete commands.
 set noshowcmd
