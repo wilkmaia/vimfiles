@@ -95,7 +95,7 @@ Plug 'neomake/neomake'
 Plug 'Shougo/deoplete.nvim'
 Plug 'carlitux/deoplete-ternjs'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
-Plug 'zchee/deoplete-clang'
+Plug 'tweekmonster/deoplete-clang2'
 Plug 'awetzel/elixir.nvim'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'Robzz/deoplete-omnisharp'
