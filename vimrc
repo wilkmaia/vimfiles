@@ -109,6 +109,9 @@ Plug 'majutsushi/tagbar'
 " Windowswap
 Plug 'wesQ3/vim-windowswap'
 
+" Vim Preview
+Plug 'kannokanno/previm'
+
 " Git
 Plug 'tpope/vim-fugitive'
 " }}}

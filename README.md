@@ -42,6 +42,8 @@ Based on [Pedro Franceschi's vimfiles](https://github.com/pedrofranceschi/vimfil
 * [tern_for_vim](https://github.com/ternjs/tern_for_vim)
 * [localvimrc](https://github.com/embear/vim-localvimrc)
 * [editorconfig](https://github.com/editorconfig/editorconfig-vim)
+* [windowswap](https://github.com/wesQ3/vim-windowswap)
+* [previm](https://github.com/kannokanno/previm)
 
 #### Installing (step by step)
 
