@@ -168,9 +168,9 @@ set nowritebackup
 set directory=$HOME/.vim/tmp//,.
 
 " Global tab width.
-set tabstop=4
+set tabstop=2
 " And again, related.
-set shiftwidth=4
+set shiftwidth=2
 
 " Files open expanded
 set foldlevelstart=50
@@ -193,8 +193,8 @@ syntax on
 
 " Sane defaults
 set expandtab
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 
 " Sets the colorscheme for terminal sessions too.
 colorscheme dracula
