@@ -249,11 +249,6 @@ augroup end
 " }}}
 " ##### Hard Mode {{{
 fun! RemapArrows()
-  inoremap <buffer> <silent> <Right> <nop>
-  inoremap <buffer> <silent> <Left> <nop>
-  inoremap <buffer> <silent> <Up> <nop>
-  inoremap <buffer> <silent> <Down> <nop>
-
   vnoremap <buffer> <silent> <Right> <nop>
   vnoremap <buffer> <silent> <Left> <nop>
   vnoremap <buffer> <silent> <Up> <nop>
