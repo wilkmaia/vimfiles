@@ -148,12 +148,12 @@ set ruler
 " Highlight matches as you type.
 set incsearch
 " Don't highlight matches.
-set nohlsearch
+" set nohlsearch
 
 " Turn off line wrapping.
 set nowrap    
 " Show 3 lines of context around the cursor.
-set scrolloff=3
+set scrolloff=5
 
 " Set the terminal's title
 set title
