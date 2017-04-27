@@ -114,6 +114,9 @@ Plug 'kannokanno/previm'
 
 " Git
 Plug 'tpope/vim-fugitive'
+
+" JS Hint
+Plug 'wookiehangover/jshint.vim'
 " }}}
 " ##### Plug post-setup {{{
 call plug#end()
@@ -460,6 +463,9 @@ augroup omnisharp
   autocmd FileType cs nnoremap <leader>b :wa!<cr>:OmniSharpBuildAsync<cr><Paste>
   autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
 augroup END
+" }}}
+" ##### JS Hint {{{
+let JSHintUpdateWriteOnly=1
 " }}}
 " }}}
 " ##### Filetype-specific  {{{
