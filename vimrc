@@ -1,7 +1,15 @@
 " .vimrc
-" Author: Jonathan Lima <greenboxal@gmail.com>
-" Source: http://github.com/greenboxal/vimfiles
+" Original Author: Jonathan Lima <greenboxal@gmail.com>
+" Original Source: http://github.com/greenboxal/vimfiles
+" 
+" Current Maintainer: Wilk Maia <wilkmaia@gmail.com>
+" Current Source: https://github.com/wilkmaia/vimfiles
 
+" ##### CScope Mappings {{{
+if has('vim_starting')
+  set runtimepath+=~/.vim/plugin/cscope_maps.vim
+endif
+" }}}
 " ##### Plug setup  {{{
 call plug#begin('~/.vim/plugged')
 " "}}}
