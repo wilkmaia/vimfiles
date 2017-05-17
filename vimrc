@@ -100,7 +100,7 @@ Plug 'michalliu/jsoncodecs.vim'
 
 " Omnicompletion
 Plug 'neomake/neomake'
-Plug 'Shougo/deoplete.nvim'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'carlitux/deoplete-ternjs'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'tweekmonster/deoplete-clang2'
@@ -419,6 +419,10 @@ let g:deoplete#enable_at_startup = 1
 " ##### deoplete-go {{{
 let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
 let g:deoplete#sources#go#use_cache = 1
+let g:deoplete#sources#go#json_directory = '~/.cache/deoplete/go/$GOOS_$GOARCH'
+let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
+let g:deoplete#sources#go#cgo = 1
+let g:deoplete#sources#go#cgo#libclang_path = '/usr/lib/libclang.so'
 " }}}
 " ##### monster (ruby) {{{
 let g:monster#completion#rcodetools#backend = "async_rct_complete"
