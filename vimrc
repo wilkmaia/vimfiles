@@ -494,7 +494,8 @@ augroup omnisharp
 augroup END
 " }}}
 " ##### Ag {{{
-let g:ag_working_path_mode="r"
+let g:ag_working_path_mode = "r"
+let g:ag_highlight = 1
 " }}}
 " }}}
 " ##### Filetype-specific  {{{
