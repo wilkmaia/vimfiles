@@ -125,6 +125,9 @@ Plug 'tpope/vim-fugitive'
 
 " Ag.vim
 Plug 'rking/ag.vim'
+
+" Syntastic
+Plug 'vim-syntastic/syntastic'
 " }}}
 " ##### Plug post-setup {{{
 call plug#end()
@@ -410,8 +413,22 @@ let g:localvimrc_persistent=1
 let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 " }}}
 " ##### Syntastic {{{
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 let g:syntastic_enable_highlighting = 0
 let g:syntastic_enable_balloons = 0
+
+let g:syntastic_python_checkers = ['pep8']
+let g:syntastic_c_checkets = ['clang_check']
+let g:syntastic_javacript_checkers = ['eslint']
+let g:syntastic_go_checkers = ['golint']
 " }}}
 " ##### deoplete {{{
 let g:deoplete#enable_at_startup = 1
