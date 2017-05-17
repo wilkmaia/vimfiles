@@ -122,6 +122,9 @@ Plug 'kannokanno/previm'
 
 " Git
 Plug 'tpope/vim-fugitive'
+
+" Ag.vim
+Plug 'rking/ag.vim'
 " }}}
 " ##### Plug post-setup {{{
 call plug#end()
@@ -468,6 +471,9 @@ augroup omnisharp
   autocmd FileType cs nnoremap <leader>b :wa!<cr>:OmniSharpBuildAsync<cr><Paste>
   autocmd CursorHold *.cs call OmniSharp#TypeLookupWithoutDocumentation()
 augroup END
+" }}}
+" ##### Ag {{{
+let g:ag_working_path_mode="r"
 " }}}
 " }}}
 " ##### Filetype-specific  {{{
