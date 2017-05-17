@@ -484,7 +484,6 @@ let g:vimwiki_ext2syntax = {'.md': 'markdown',
 " }}}
 " ##### OmniSharp {{{
 let g:OmniSharp_selector_ui = 'fzf'
-let g:OmniSharp_server_type = 'v1'
 let g:OmniSharp_server_type = 'roslyn'
 
 augroup omnisharp
