@@ -171,14 +171,14 @@ set incsearch
 " set nohlsearch
 
 " Turn off line wrapping.
-set nowrap    
+" set nowrap    
 " Show 3 lines of context around the cursor.
-set scrolloff=5
+set scrolloff=3
 
 " Set the terminal's title
 set title
 " No beeping.
-set visualbell
+" set visualbell
 
 " Don't make a backup before overwriting a file.
 set nobackup
@@ -217,7 +217,7 @@ set shiftwidth=2
 set tabstop=2
 
 " Sets the colorscheme for terminal sessions too.
-colorscheme dracula
+colorscheme molokai
 
 " Leader = ,
 let mapleader = ","
@@ -234,6 +234,7 @@ let g:omni_sql_no_default_maps = 1
 
 " Completion
 set completeopt=menu,noselect
+set complete=.,w,b,u,t,i,U,d
 
 " augroup completion
 "   autocmd!
@@ -342,11 +343,11 @@ nnoremap <leader>xx :!chmod +x %<cr>
 nnoremap <leader>q :pclose<cr>:cclose<cr>
 
 " OS Clipboard
-vnoremap <leader>c "*y
-vnoremap <leader>v "*p
-vnoremap <leader>V "*P
-nnoremap <leader>v "*p
-nnoremap <leader>V "*P
+vnoremap <leader>c "+y
+vnoremap <leader>v "+p
+vnoremap <leader>V "+P
+nnoremap <leader>v "+p
+nnoremap <leader>V "+P
 
 " Fix tmux navigation
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
