@@ -104,7 +104,6 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'carlitux/deoplete-ternjs'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'tweekmonster/deoplete-clang2'
-Plug 'awetzel/elixir.nvim'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'Robzz/deoplete-omnisharp'
 Plug 'mhartington/deoplete-typescript'
@@ -128,6 +127,9 @@ Plug 'rking/ag.vim'
 
 " Syntastic
 Plug 'vim-syntastic/syntastic'
+
+" Elixir
+Plug 'slashmili/alchemist.vim'
 " }}}
 " ##### Plug post-setup {{{
 call plug#end()
@@ -496,6 +498,9 @@ augroup END
 " ##### Ag {{{
 let g:ag_working_path_mode = "r"
 let g:ag_highlight = 1
+" }}}
+" ##### Previm {{{
+let g:previm_open_cmd = 'google-chrome-stable'
 " }}}
 " }}}
 " ##### Filetype-specific  {{{
