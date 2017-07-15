@@ -78,7 +78,11 @@ Open Vim:
 
 Install bundles by typing
 
-	:PluginInstall
+	:PlugInstall
+	
+Update remote plugins by typing
+
+	:UpdateRemotePlugins
 
 Execute plugin specific installation
 
