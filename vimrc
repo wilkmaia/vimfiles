@@ -245,6 +245,10 @@ set complete=.,w,b,u,t,i,U,d
 
 " Incsearch
 set inccommand=split
+
+" 80 characters column highlight
+set colorcolumn=80
+highlight ColorColumn ctermbg=gray
 " }}}
 " ##### General mappings  {{{
 " ##### Tabs {{{
