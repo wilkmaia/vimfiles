@@ -86,7 +86,7 @@ Plug 'uarun/vim-protobuf'
 Plug 'CyCoreSystems/vim-cisco-ios'
 Plug 'tpope/vim-markdown'
 Plug 'jtratner/vim-flavored-markdown'
-Plug 'evanmiller/nginx-vim-syntax'
+" Plug 'evanmiller/nginx-vim-syntax'
 Plug 'leafgarland/typescript-vim'
 Plug 'PProvost/vim-ps1'
 Plug 'Matt-Deacalion/vim-systemd-syntax'
@@ -130,6 +130,14 @@ Plug 'rking/ag.vim'
 
 " Elixir
 Plug 'slashmili/alchemist.vim'
+
+" Devlindo
+Plug 'thalesmello/devlindo.vim'
+
+" Vim JSX
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+
 " }}}
 " ##### Plug post-setup {{{
 call plug#end()
