@@ -105,7 +105,7 @@ Plug 'carlitux/deoplete-ternjs'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'tweekmonster/deoplete-clang2'
 Plug 'OmniSharp/omnisharp-vim'
-Plug 'Robzz/deoplete-omnisharp'
+Plug 'cyansprite/deoplete-omnisharp' , {'do': './install.sh'}
 Plug 'mhartington/deoplete-typescript'
 
 " Search
