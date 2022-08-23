@@ -106,7 +106,7 @@ Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'tweekmonster/deoplete-clang2'
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'cyansprite/deoplete-omnisharp' , {'do': './install.sh'}
-Plug 'mhartington/deoplete-typescript'
+" Plug 'mhartington/deoplete-typescript'
 
 " Search
 Plug 'haya14busa/incsearch.vim'
@@ -255,7 +255,7 @@ set complete=.,w,b,u,t,i,U,d
 set inccommand=split
 
 " 80 characters column highlight
-set colorcolumn=80
+set colorcolumn=120
 highlight ColorColumn ctermbg=gray
 " }}}
 " ##### General mappings  {{{
