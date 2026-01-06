@@ -30,7 +30,6 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'mhinz/vim-startify'
 Plug 'tpope/vim-abolish'
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-eunuch'
 Plug 'edkolev/tmuxline.vim'
 Plug 'bfredl/nvim-miniyank'
@@ -42,7 +41,6 @@ Plug 'vimwiki/vimwiki'
 
 " Support
 Plug 'tpope/vim-dispatch'
-Plug 'embear/vim-localvimrc'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -56,57 +54,6 @@ Plug 'Shougo/vimproc.vim'
 Plug 'sjl/badwolf'
 Plug 'dracula/vim'
 Plug 'tomasr/molokai'
-
-" Languages
-Plug 'b4winckler/vim-objc'
-Plug 'rodjek/vim-puppet'
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
-Plug 'fatih/vim-go'
-Plug 'dag/vim-fish'
-Plug 'pangloss/vim-javascript'
-Plug 'gkz/vim-ls'
-Plug 'kchmck/vim-coffee-script'
-Plug 'hashivim/vim-terraform'
-Plug 'hashivim/vim-packer'
-Plug 'hashivim/vim-consul'
-Plug 'hashivim/vim-vaultproject'
-Plug 'OrangeT/vim-csharp'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'ekalinin/Dockerfile.vim'
-Plug 'digitaltoad/vim-pug'
-Plug 'elixir-lang/vim-elixir'
-Plug 'slashmili/alchemist.vim'
-Plug 'vim-erlang/vim-erlang-runtime'
-Plug 'vim-erlang/vim-erlang-compiler'
-Plug 'vim-erlang/vim-erlang-omnicomplete'
-Plug 'vim-erlang/vim-erlang-tags'
-Plug 'osyo-manga/vim-monster'
-Plug 'zchee/deoplete-jedi'
-Plug 'uarun/vim-protobuf'
-Plug 'CyCoreSystems/vim-cisco-ios'
-Plug 'tpope/vim-markdown'
-Plug 'jtratner/vim-flavored-markdown'
-" Plug 'evanmiller/nginx-vim-syntax'
-Plug 'leafgarland/typescript-vim'
-Plug 'PProvost/vim-ps1'
-Plug 'Matt-Deacalion/vim-systemd-syntax'
-Plug 'zainin/vim-mikrotik'
-Plug 'rust-lang/rust.vim'
-Plug 'jodosha/vim-godebug'
-
-" JS Beautify
-Plug 'michalliu/jsruntime.vim'
-Plug 'michalliu/jsoncodecs.vim'
-
-" Omnicompletion
-Plug 'neomake/neomake'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins'}
-Plug 'carlitux/deoplete-ternjs'
-Plug 'zchee/deoplete-go', { 'do': 'make' }
-Plug 'tweekmonster/deoplete-clang2'
-Plug 'OmniSharp/omnisharp-vim'
-Plug 'cyansprite/deoplete-omnisharp' , {'do': './install.sh'}
-Plug 'mhartington/deoplete-typescript'
 
 " Search
 Plug 'haya14busa/incsearch.vim'
@@ -125,18 +72,21 @@ Plug 'tpope/vim-fugitive'
 " Ag.vim
 Plug 'rking/ag.vim'
 
-" Syntastic
-" Plug 'vim-syntastic/syntastic'
+" LSP core configs
+Plug 'neovim/nvim-lspconfig'
 
-" Elixir
-Plug 'slashmili/alchemist.vim'
+" Completion engine + sources (no AI)
+Plug 'L3MON4D3/LuaSnip', { 'tag': 'v2.*', 'do': 'make install_jsregexp' }
+Plug 'hrsh7th/nvim-cmp', { 'branch': 'main' }
+Plug 'hrsh7th/cmp-nvim-lsp', { 'branch': 'main' }
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'nvim-lua/plenary.nvim' " Required for typescript-tools.nvim
+Plug 'pmizio/typescript-tools.nvim'
+Plug 'nvim-tree/nvim-web-devicons' " Optional icons for Trouble
+Plug 'folke/trouble.nvim', { 'branch': 'main' }
 
-" Devlindo
-Plug 'thalesmello/devlindo.vim'
-
-" Vim JSX
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+" Treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " }}}
 " ##### Plug post-setup {{{
@@ -317,7 +267,7 @@ nnoremap zc zc
 nnoremap zf mzzMzvzz
 " }}}
 " ##### Search {{{
-map /  <Plug>(incsearch-forward)
+"map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
 map g/ <Plug>(incsearch-stay)
 " }}}
@@ -459,16 +409,6 @@ let g:deoplete#sources#go#cgo#libclang_path = '/usr/lib/libclang.so'
 " ##### monster (ruby) {{{
 let g:monster#completion#rcodetools#backend = "async_rct_complete"
 " }}}
-" ##### Neomake {{{
-augroup neomake_save_linter
-	autocmd!
-	autocmd BufWritePost * Neomake
-augroup end
-
-let g:neomake_highlight_columns = 1
-let g:neomake_javascript_standard_maker = { 'errorformat': '%E %f:%l:%c: %m' }
-let g:neomake_puppet_enabled_makers = ['puppet', 'puppetlint']
-" }}}
 " ##### vim-tmuxline.vim {{{
 let g:airline#extensions#tmuxline#enabled = 0
 let g:tmuxline_preset = {
@@ -513,6 +453,47 @@ let g:ag_highlight = 1
 " }}}
 " ##### Previm {{{
 let g:previm_open_cmd = 'google-chrome-stable'
+" }}}
+" ##### Trouble {{{
+lua << EOF
+require('trouble').setup({
+  -- leave empty for defaults, or customize here
+  -- see the [README](https://github.com/folke/trouble.nvim?tab=readme-ov-file#%EF%B8%8F-configuration) for full config
+  modes = {
+    preview_float = {
+      mode = "diagnostics",
+      preview = {
+        type = "float",
+        relative = "editor",
+        border = "rounded",
+        title = "Preview",
+        title_pos = "center",
+        position = { 0, -2 },
+        size = { width = 0.3, height = 0.3 },
+        zindex = 200,
+      },
+    },
+  },
+})
+EOF
+
+" Diagnostics (workspace)
+nnoremap <silent> <leader>xx :Trouble diagnostics toggle<CR>
+
+" Buffer diagnostics only
+nnoremap <silent> <leader>xX :Trouble diagnostics toggle filter.buf=0<CR>
+
+" Document symbols
+nnoremap <silent> <leader>cs :Trouble symbols toggle focus=false<CR>
+
+" LSP definitions / references / etc., open at the right
+nnoremap <silent> <leader>cl :Trouble lsp toggle focus=false win.position=right<CR>
+
+" Location list
+nnoremap <silent> <leader>xL :Trouble loclist toggle<CR>
+
+" Quickfix list
+nnoremap <silent> <leader>xQ :Trouble qflist toggle<CR>
 " }}}
 " }}}
 " ##### Filetype-specific  {{{
