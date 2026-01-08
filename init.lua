@@ -1,0 +1,5 @@
+require('wim.settings')
+require('wim.remap')
+require('wim.lazynvim')
+require('wim.lsp')
+require('wim.events')
