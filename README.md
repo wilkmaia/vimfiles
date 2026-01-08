@@ -12,3 +12,4 @@ These are the most unorthodox requirements. Mind other requirements might still 
 - [terraform-ls](https://github.com/hashicorp/terraform-ls) - Required for Terraform LSP.
 - [helm-ls](https://github.com/mrjosh/helm-ls) - Required for Helm LSP.
 - [yaml-language-server](https://github.com/redhat-developer/yaml-language-server) - Also required for the Helm LSP.
+- [Nerd Fonts](https://www.nerdfonts.com) - Because yes.

@@ -30,16 +30,6 @@ local function has_value(tab, val)
     return false
 end
 
-require('mini.completion').setup({
-  lsp_completion = {
-    source_func = 'omnifunc',
-    auto_setup = true,
-  },
-  window = {
-    config = { border = 'double' },
-  },
-})
-
 -- Lua
 vim.lsp.config('luals', {
   cmd = { 'lua-language-server' },
