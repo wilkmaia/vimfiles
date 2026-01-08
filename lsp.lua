@@ -30,54 +30,114 @@ local function has_value(tab, val)
     return false
 end
 
--- Lua
-vim.lsp.config('luals', {
-  cmd = { 'lua-language-server' },
-  filetypes = { 'lua' },
-  root_markers = { '.luarc.json', '.luarc.jsonc' },
-  settings = {
-    Lua = {
-      runtime = { version = 'LuaJIT' },
-      diagnostics = {
-        globals = {},
+local lsp_configs = {
+  clangd = {
+    -- C / C++ / Obj-C
+    cmd = { 'clangd' },
+    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
+    root_markers = { '.terraform', '.git' },
+  },
+  luals = {
+    -- Lua
+    cmd = { 'lua-language-server' },
+    filetypes = { 'lua' },
+    root_markers = { '.luarc.json', '.luarc.jsonc' },
+    settings = {
+      Lua = {
+        runtime = { version = 'LuaJIT' },
+        diagnostics = {
+          globals = {},
+        },
+        workspace = {
+          library = vim.api.nvim_get_runtime_file('', true),
+          checkThirdParty = false,
+        },
+        telemetry = { enabled = false },
       },
-      workspace = {
-        library = vim.api.nvim_get_runtime_file('', true),
-        checkThirdParty = false,
-      },
-      telemetry = { enabled = false },
+    },
+
+    -- This is meant to only add the `vim` global on the nvim config files. But if neovim
+    -- is opened anywhere and a buffer is loaded with any of its config files, this can
+    -- be bypassed. Not sure how to better solve this problem. Leaving this as is for now.
+    on_attach = function(client, buffer)
+      local g = client.settings.Lua.diagnostics.globals
+      if vim.api.nvim_buf_get_name(buffer):match(vim.fn.stdpath('config')) and not has_value(g, 'vim') then
+        table.insert(g, 'vim')
+      end
+    end
+  },
+  ts_ls = {
+    -- JavaScript / TypeScript
+    cmd = { 'typescript-language-server', '--stdio' },
+    filetypes = {
+      'javascript',
+      'javascriptreact',
+      'javascript.jsx',
+      'typescript',
+      'typescriptreact',
+      'typescript.tsx'
+    },
+    root_markers = { 'package.json', '.git', 'tsconfig.json' },
+    settings = {
+      ['typescript.disableAutomaticTypeAcquisition'] = true,
     },
   },
-
-  -- This is meant to only add the `vim` global on the nvim config files. But if neovim
-  -- is opened anywhere and a buffer is loaded with any of its config files, this can
-  -- be bypassed. Not sure how to better solve this problem. Leaving this as is for now.
-  on_attach = function(client, buffer)
-    local g = client.settings.Lua.diagnostics.globals
-    if vim.api.nvim_buf_get_name(buffer):match(vim.fn.stdpath('config')) and not has_value(g, 'vim') then
-      table.insert(g, 'vim')
-    end
-  end
-})
-
-vim.lsp.enable('luals')
-
--- Typescript
-vim.lsp.config('ts_ls', {
-  cmd = { 'typescript-language-server', '--stdio' },
-  filetypes = {
-    'javascript',
-    'javascriptreact',
-    'javascript.jsx',
-    'typescript',
-    'typescriptreact',
-    'typescript.tsx'
+  basedpyright = {
+    -- Python
+    cmd = { 'basedpyright-langserver', '--stdio' },
+    filetypes = { 'python' },
+    settings = {
+      basedpyright = {
+        analysis = {
+          typeCheckingMode = 'standard', -- options: 'off', 'basic', 'standard', 'all'
+          autoSearchPaths = true,
+          useLibraryCodeForTypes = true,
+          diagnosticMode = 'openFilesOnly',
+        },
+      },
+      python = {
+        pythonPath = vim.fn.exepath('python3') -- ensures it uses the active venv
+      }
+    }
   },
-  root_markers = { 'package.json', '.git', 'tsconfig.json' },
-  settings = {
-    ['typescript.disableAutomaticTypeAcquisition'] = true,
+  terraformls = {
+    -- Terraform
+    cmd = { 'terraform-ls', 'serve', '-log-file=/dev/null' },
+    filetypes = { 'terraform', 'tf', 'terraform-vars' },
+    root_markers = { '.terraform', '.git' },
   },
-})
+  helm_ls = {
+    -- Helm
+    cmd = { "helm_ls", "serve" },
+    filetypes = { 'helm' },
+    root_markers = { 'Chart.yaml' },
+    settings = {
+      ['helm-ls'] = {
+        yamlls = {
+          enabled = true,
+          path = "yaml-language-server",
+        }
+      }
+    }
+  },
+}
+
+local blink_cmp = require('blink.cmp')
+for server, cfg in pairs(lsp_configs) do
+  local capabilities = {
+    textDocument = {
+      foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true
+      }
+    }
+  }
+  capabilities = vim.tbl_deep_extend('force', capabilities, vim.lsp.protocol.make_client_capabilities())
+  capabilities = vim.tbl_deep_extend('force', capabilities, cfg.capabilities or {})
+  cfg.capabilities = blink_cmp.get_lsp_capabilities(capabilities)
+  vim.lsp.config(server, cfg)
+  vim.lsp.enable(server)
+end
 
 local old_handler = vim.lsp.handlers["workspace/executeCommand"]
 vim.lsp.handlers["workspace/executeCommand"] = function(a, result, ctx)
@@ -87,52 +147,3 @@ vim.lsp.handlers["workspace/executeCommand"] = function(a, result, ctx)
     old_handler(a, result, ctx)
   end
 end
-
-vim.lsp.enable('ts_ls')
-
--- Python
-vim.lsp.config('basedpyright', {
-  cmd = { 'basedpyright-langserver', '--stdio' },
-  filetypes = { 'python' },
-  settings = {
-    basedpyright = {
-      analysis = {
-        typeCheckingMode = 'standard', -- options: 'off', 'basic', 'standard', 'all'
-        autoSearchPaths = true,
-        useLibraryCodeForTypes = true,
-        diagnosticMode = 'openFilesOnly',
-      },
-    },
-    python = {
-      pythonPath = vim.fn.exepath('python3') -- ensures it uses the active venv
-    }
-  }
-})
-
-vim.lsp.enable('basedpyright')
-
--- Terraform
-vim.lsp.config('terraformls', {
-  cmd = { 'terraform-ls', 'serve', '-log-file=/dev/null' },
-  filetypes = { 'terraform', 'tf', 'terraform-vars' },
-  root_markers = { '.terraform', '.git' },
-})
-
-vim.lsp.enable('terraformls')
-
--- Helm
-vim.lsp.config('helm_ls', {
-  cmd = { "helm_ls", "serve" },
-  filetypes = { 'helm' },
-  root_markers = { 'Chart.yaml' },
-  settings = {
-    ['helm-ls'] = {
-      yamlls = {
-        enabled = true,
-        path = "yaml-language-server",
-      }
-    }
-  }
-})
-
-vim.lsp.enable('helm_ls')
