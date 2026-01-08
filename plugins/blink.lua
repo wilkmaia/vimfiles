@@ -3,6 +3,12 @@ return {
     'saghen/blink.cmp',
     -- use a release tag to download pre-built binaries
     version = '1.*',
+    lazy = 'VeryLazy',
+    dependencies = {
+      { 'onsails/lspkind.nvim', version = '*' },
+      { 'nvim-tree/nvim-web-devicons', version = '*' },
+      { 'xzbdmw/colorful-menu.nvim', version = '*' },
+    },
 
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -21,8 +27,74 @@ return {
       -- See :h blink-cmp-config-keymap for defining your own keymap
       keymap = { preset = 'default' },
 
-      -- (NOT Default) Show the documentation popup automatically
-      completion = { documentation = { auto_show = true } },
+      completion = {
+        documentation = {
+          auto_show = true,
+          window = {
+            border = 'rounded',
+          },
+        },
+        list = {
+          selection = {
+            auto_insert = true,
+            preselect = false,
+          },
+        },
+
+        menu = {
+          draw = {
+            columns = {
+              { 'kind_icon' },
+              { 'label', gap = 1 },
+              { 'source_name' },
+            },
+            components = {
+              kind_icon = {
+                -- Menu icon setup from https://cmp.saghen.dev/recipes#nvim-web-devicons-lspkind
+                text = function(ctx)
+                  local icon = ctx.kind_icon
+                  if vim.tbl_contains({ 'Path' }, ctx.source_name) then
+                    local dev_icon, _ = require('nvim-web-devicons').get_icon(ctx.label)
+                    if dev_icon then
+                      icon = dev_icon
+                    end
+                  else
+                    icon = require('lspkind').symbolic(ctx.kind, {
+                      mode = 'symbol',
+                    })
+                  end
+
+                  return icon .. ctx.icon_gap
+                end,
+                highlight = function(ctx)
+                  local hl = ctx.kind_hl
+                  if vim.tbl_contains({ 'Path' }, ctx.source_name) then
+                    local dev_icon, dev_hl = require('nvim-web-devicons').get_icon(ctx.label)
+                    if dev_icon then
+                      hl = dev_hl
+                    end
+                  end
+                  return hl
+                end,
+              },
+              label = {
+                text = function(ctx)
+                  return require('colorful-menu').blink_components_text(ctx)
+                end,
+                highlight = function(ctx)
+                  return require('colorful-menu').blink_components_highlight(ctx)
+                end,
+              },
+              source_name = {
+                text = function(ctx)
+                  return '[' .. ctx.source_name .. ']'
+                end,
+              },
+            },
+            treesitter = { 'lsp' },
+          },
+        },
+      },
 
       -- Default list of enabled providers defined so that you can extend it
       -- elsewhere in your config, without redefining it, due to `opts_extend`
@@ -37,7 +109,13 @@ return {
       -- See the fuzzy documentation for more information
       fuzzy = { implementation = 'prefer_rust_with_warning' },
 
-      signature = { enabled = true }
+      signature = {
+        enabled = true,
+        window = {
+          border = 'rounded',
+          scrollbar = true,
+        },
+      },
     },
   }
 }

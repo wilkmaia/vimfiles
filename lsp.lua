@@ -78,8 +78,21 @@ local lsp_configs = {
       'typescript.tsx'
     },
     root_markers = { 'package.json', '.git', 'tsconfig.json' },
+    init_options = {
+      disableAutomaticTypingAcquisition = true,
+    },
     settings = {
-      ['typescript.disableAutomaticTypeAcquisition'] = true,
+      typescript = {
+        inlayHints = {
+          includeInlayParameterNameHints = 'all',
+          includeInlayVariableTypeHints = true,
+        },
+      },
+      javascript = {
+        suggest = {
+          completeFunctionCalls = true,
+        },
+      },
     },
   },
   basedpyright = {
