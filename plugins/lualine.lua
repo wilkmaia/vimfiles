@@ -22,7 +22,6 @@ return {
         },
         lualine_y = {
           'progress',
-          'diff',
           'diagnostics',
         },
       },
