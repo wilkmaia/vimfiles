@@ -14,10 +14,8 @@ vim.keymap.set('v', '<C-j>', ":m '>+1<CR>gv=gv")
 vim.keymap.set('v', '<C-k>', ":m '<-2<CR>gv=gv")
 
 vim.keymap.set('x', '<leader>p', '"_dP')
-vim.keymap.set('n', '<leader>c', '"+y')
-vim.keymap.set('v', '<leader>c', '"+y')
+vim.keymap.set({ 'n', 'v' }, '<leader>c', '"+y')
 vim.keymap.set('n', '<leader>C', '"+Y')
-vim.keymap.set('n', '<leader>d', '"_d')
-vim.keymap.set('v', '<leader>d', '"_d')
+vim.keymap.set({ 'n', 'v' }, '<leader>d', '"_d')
 
 vim.keymap.set('i', '<C-c>', '<Esc>')
