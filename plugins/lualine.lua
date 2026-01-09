@@ -20,10 +20,6 @@ return {
           'filetype',
           'lsp_status',
         },
-        lualine_y = {
-          'progress',
-          'diagnostics',
-        },
       },
       extensions = {
         'fugitive',
