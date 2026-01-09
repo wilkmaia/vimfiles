@@ -22,3 +22,6 @@ vim.keymap.set('i', '<C-c>', '<Esc>')
 
 vim.keymap.set('n', '<M-j>', '<cmd>cnext<CR>')
 vim.keymap.set('n', '<M-k>', '<cmd>cprev<CR>')
+
+vim.keymap.set('n', '<C-/>', 'gcc', { remap = true })
+vim.keymap.set('v', '<C-/>', 'gc', { remap = true })
