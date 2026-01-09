@@ -21,6 +21,3 @@ vim.keymap.set('n', '<leader>d', '"_d')
 vim.keymap.set('v', '<leader>d', '"_d')
 
 vim.keymap.set('i', '<C-c>', '<Esc>')
-
--- LSP-related
-vim.keymap.set('n', 'gD', vim.lsp.buf.definition, { desc = 'LSP: Go to source definition' })
