@@ -9,6 +9,7 @@ vim.opt.softtabstop = DEFAULT_TAB_SIZE
 vim.opt.shiftwidth = DEFAULT_TAB_SIZE
 vim.opt.expandtab = true
 vim.opt.smartindent = true
+vim.opt.winborder = 'rounded'
 
 vim.opt.nu = true
 vim.opt.relativenumber = true
