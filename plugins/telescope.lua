@@ -1,6 +1,3 @@
-local t = require('telescope.builtin')
-local wim_multigrep = require('wim.plugins.wim.multigrep')
-
 return {
   {
     'nvim-telescope/telescope.nvim',
@@ -10,16 +7,17 @@ return {
       'nvim-telescope/telescope-ui-select.nvim',
       { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
     },
-    keys = {
-      { '<leader>ff', t.find_files,                 { desc = 'Telescope find files' } },
-      { '<C-p>',      t.git_files,                  { desc = 'Telescope git files' } },
-      { '<leader>fg', wim_multigrep.live_multigrep, { desc = 'Telescope live grep' } },
-      { '<leader>fb', t.buffers,                    { desc = 'Telescope buffers' } },
-      { '<leader>fh', t.help_tags,                  { desc = 'Telescope help tags' } },
-    },
     config = function()
-      require('telescope').load_extension('ui-select')
-      require('telescope').load_extension('fzf')
+      local t = require('telescope')
+      t.load_extension('ui-select')
+      t.load_extension('fzf')
+
+      local builtin = require('telescope.builtin')
+      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
+      vim.keymap.set('n', '<leader>fg', require('wim.plugins.wim.multigrep').live_multigrep, { desc = 'Telescope live grep' })
+      vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
+      vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
+      vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = 'Telescope git files' })
     end
   }
 }
