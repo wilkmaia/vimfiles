@@ -133,6 +133,10 @@ local lsp_configs = {
       }
     }
   },
+  yamlls = {
+    cmd = { "yaml-language-server" },
+    filetypes = { 'yaml', 'tmpl', 'yml' },
+  },
 }
 
 local blink_cmp = require('blink.cmp')
