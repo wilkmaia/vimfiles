@@ -22,12 +22,12 @@ ctrl-w + d -> show error/warning message in the line under the cursor
 
 -- Misc
 local function has_value(tab, val)
-    for _, value in ipairs(tab) do
-        if value == val then
-            return true
-        end
+  for _, value in ipairs(tab) do
+    if value == val then
+      return true
     end
-    return false
+  end
+  return false
 end
 
 local lsp_configs = {
