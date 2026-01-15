@@ -5,9 +5,9 @@ return {
     version = '1.*',
     lazy = 'VeryLazy',
     dependencies = {
-      { 'onsails/lspkind.nvim', version = '*' },
+      { 'onsails/lspkind.nvim',        version = '*' },
       { 'nvim-tree/nvim-web-devicons', version = '*' },
-      { 'xzbdmw/colorful-menu.nvim', version = '*' },
+      { 'xzbdmw/colorful-menu.nvim',   version = '*' },
     },
 
     ---@module 'blink.cmp'
@@ -30,9 +30,6 @@ return {
       completion = {
         documentation = {
           auto_show = true,
-          window = {
-            border = 'rounded',
-          },
         },
         list = {
           selection = {
@@ -45,7 +42,7 @@ return {
           draw = {
             columns = {
               { 'kind_icon' },
-              { 'label', gap = 1 },
+              { 'label',      gap = 1 },
               { 'source_name' },
             },
             components = {
