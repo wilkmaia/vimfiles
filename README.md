@@ -21,7 +21,9 @@ If the list below is wrong or outdated, you're more than welcome to submit a PR 
 
 - [tree-sitter-cli](https://github.com/tree-sitter/tree-sitter/blob/master/crates/cli/README.md) - Required by [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter).
 - [ripgrep](https://github.com/BurntSushi/ripgrep) - Required by [nvim-telescope](https://github.com/nvim-telescope/telescope.nvim).
+- [sharkdp/fd](https://github.com/sharkdp/fd) - Extends telescope's capabilities.
 - [lua-language-server](https://github.com/LuaLS/lua-language-server) - Required for Lua LSP.
+- [luarocks](https://luarocks.org/) - NOT REALLY NEEDED, but without it lazy.nvim won't be able to install plugins that require `luarocks`.
 - [basedpyright](https://github.com/DetachHead/basedpyright) - Required for Python LSP.
 - [typescript-language-server](https://github.com/typescript-language-server/typescript-language-server) - Required for JS/TS LSP.
 - [terraform-ls](https://github.com/hashicorp/terraform-ls) - Required for Terraform LSP.
