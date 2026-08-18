@@ -137,6 +137,12 @@ local lsp_configs = {
     cmd = { "yaml-language-server" },
     filetypes = { 'yaml', 'tmpl', 'yml' },
   },
+  zls = {
+    cmd = { 'zls' },
+    filetypes = { 'zig', 'zir' },
+    root_markers = { '.git', 'build.zig' },
+    single_file_support = true,
+  },
 }
 
 local blink_cmp = require('blink.cmp')
