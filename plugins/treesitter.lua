@@ -4,7 +4,7 @@ return {
     lazy = false,
     build = ':TSUpdate',
     config = function(_, opts)
-      require'nvim-treesitter'.install {
+      require 'nvim-treesitter'.install {
         'c',
         'fish',
         'javascript',
