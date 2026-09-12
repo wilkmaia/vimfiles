@@ -34,7 +34,7 @@ local lsp_configs = {
   clangd = {
     -- C / C++ / Obj-C
     cmd = { 'clangd' },
-    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
+    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'h', 'hpp' },
     root_markers = { '.terraform', '.git' },
   },
   luals = {
