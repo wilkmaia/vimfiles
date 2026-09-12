@@ -143,6 +143,14 @@ local lsp_configs = {
     root_markers = { '.git', 'build.zig' },
     single_file_support = true,
   },
+  go = {
+    cmd = { 'gopls' },
+    filetypes = { 'go' },
+    root_markers = { '.git', 'go.mod', 'go.work' },
+    init_options = {
+      usePlaceholders = true,
+    },
+  },
 }
 
 local blink_cmp = require('blink.cmp')
