@@ -28,3 +28,17 @@ vim.keymap.set('n', '<C-_>', 'gcc', { remap = true })
 vim.keymap.set('v', '<C-_>', 'gc', { remap = true })
 vim.keymap.set('n', '<C-/>', 'gcc', { remap = true })
 vim.keymap.set('v', '<C-/>', 'gc', { remap = true })
+
+-- Toggle maximize/restore window state
+local window_maximized = false
+vim.keymap.set('n', '<C-w>m', function()
+  window_maximized = not window_maximized
+
+  if window_maximized then
+    vim.cmd('resize')
+    vim.cmd('vertical resize')
+  else
+    vim.cmd('vertical wincmd =')
+    vim.cmd('horizontal wincmd =')
+  end
+end)
