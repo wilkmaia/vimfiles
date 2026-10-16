@@ -49,7 +49,10 @@ local lsp_configs = {
           globals = {},
         },
         workspace = {
-          library = vim.api.nvim_get_runtime_file('', true),
+          library = vim.list_extend(
+            vim.api.nvim_get_runtime_file('', true), -- vim runtime library
+            { '/usr/share/hypr/stubs' }              -- Hyprland Lua API stubs (hl.meta.lua)
+          ),
           checkThirdParty = false,
         },
         telemetry = { enabled = false },
