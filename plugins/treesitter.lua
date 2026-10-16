@@ -7,6 +7,7 @@ return {
       require 'nvim-treesitter'.install {
         'c',
         'fish',
+        'go',
         'javascript',
         'json',
         'lua',
